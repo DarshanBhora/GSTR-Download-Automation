@@ -13,7 +13,10 @@ driver = webdriver.Chrome()
 driver.maximize_window() 
 
 # Open the Excel file
-excel_file_path = "C:/Excel/Details.xlsx"
+excel_file_path = #enter the excel path file here; for example: "C:/Excel/Details.xlsx"
+#for this line of the code to work make sure your headers in row 1 are as follows:
+#username	password	financial year	quarters	period
+
 workbook = openpyxl.load_workbook(excel_file_path)
 sheet = workbook.active
 
@@ -205,7 +208,10 @@ wait.until(EC.invisibility_of_element_located((By.CLASS_NAME, "dimmer-holder")))
 time.sleep(3)
 
 # Step 1: Load the Subsequent.xlsx file
-subsequent_excel_file_path = "C:/Excel/Subsequent.xlsx"
+subsequent_excel_file_path = #enter the excel path file here; for example: "C:/Excel/Subsequent.xlsx"
+#for this code to work make sure your header in the excel as follows:
+#financial year	  quarters	period
+
 subsequent_workbook = openpyxl.load_workbook(subsequent_excel_file_path)
 subsequent_sheet = subsequent_workbook.active
 
@@ -231,7 +237,6 @@ if (
 ):
     print("Columns 'financial year,' 'quarter,' and 'period' not found in the Subsequent.xlsx sheet.")
 else:
-    # Step 2: Iterate through all rows in the Subsequent.xlsx file
     for row in subsequent_sheet.iter_rows(min_row=2, values_only=True):
         financial_year = row[financial_year_column_index - 1]
         quarters_value = row[quarters_column_index - 1]
@@ -242,7 +247,6 @@ else:
         wait = WebDriverWait(driver, 6)
         wait.until(EC.invisibility_of_element_located((By.CLASS_NAME, "dimmer-holder")))
 
-        # Step 4: Select the financial year, quarter, and period
         financial_year_dropdown = driver.find_element(By.NAME, "fin")
         select = Select(financial_year_dropdown)
         select.select_by_visible_text(financial_year)
@@ -266,16 +270,12 @@ else:
 
         time.sleep(3)
 
-        # Step 5: Click on the Search button
         search_element = driver.find_element(By.CSS_SELECTOR, "button[class='btn btn-primary srchbtn']")
         driver.execute_script("arguments[0].click();", search_element)
         #search_element.click()
         
         time.sleep(5)
-
-        # Step 6: Wait for the Generate JSON button to become visible and click it twice
-        #click on gstr1 button
-        
+ 
         gstr_1 = driver.find_element(By.CSS_SELECTOR, "button[data-ng-click='offlinepath(x.return_ty,x.status)']")
         driver.execute_script("arguments[0].click();", gstr_1)
         #gstr_1.click()
@@ -303,7 +303,10 @@ wait = WebDriverWait(driver, 15)
 wait.until(EC.invisibility_of_element_located((By.CLASS_NAME, "dimmer-holder")))
 
 # Step 1: Load the Subsequent.xlsx file
-subsequent_excel_file_path = "C:/Excel/2Aand2B.xlsx"
+subsequent_excel_file_path = #enter the excel path file here; for example: "C:/Excel/Subsequent.xlsx"
+#for this code to work make sure your header in the excel as follows:
+#financial year	  quarters	period
+
 subsequent_workbook = openpyxl.load_workbook(subsequent_excel_file_path)
 subsequent_sheet = subsequent_workbook.active
 
@@ -329,7 +332,6 @@ if (
 ):
     print("Columns 'financial year,' 'quarter,' and 'period' not found in the Subsequent.xlsx sheet.")
 else:
-    # Step 2: Iterate through all rows in the Subsequent.xlsx file
     for row in subsequent_sheet.iter_rows(min_row=2, values_only=True):
         financial_year = row[financial_year_column_index - 1]
         quarters_value = row[quarters_column_index - 1]
@@ -338,7 +340,6 @@ else:
         wait = WebDriverWait(driver, 7)
         wait.until(EC.presence_of_element_located((By.CLASS_NAME, "dimmer-holder")))
 
-        # Step 4: Select the financial year, quarter, and period
         financial_year_dropdown = driver.find_element(By.NAME, "fin")
         select = Select(financial_year_dropdown)
         select.select_by_visible_text(financial_year)
@@ -362,17 +363,12 @@ else:
 
         time.sleep(3)
 
-        # Step 5: Click on the Search button
         search_element = driver.find_element(By.CSS_SELECTOR, "button[class='btn btn-primary srchbtn']")
         driver.execute_script("arguments[0].click();", search_element)
         #search_element.click()
         
         time.sleep(5)
 
-        # Step 6: Wait for the Generate JSON button to become visible and click it twice
-        #click on gstr1 button
-        
-        #click on gstr2a button
         gstr_2a = driver.find_element(By.CSS_SELECTOR, "button[data-ng-click='offlinepath(x.return_ty)']")
         driver.execute_script("arguments[0].click();", gstr_2a)
         
@@ -398,19 +394,13 @@ else:
 wait = WebDriverWait(driver, 15)
 wait.until(EC.invisibility_of_element_located((By.CLASS_NAME, "dimmer-holder")))
         
-# Define the download directory
-download_directory = "C:/Excel/GSTR2B"
+subsequent_excel_file_path = #enter the excel path file here; for example: "C:/Excel/Subsequent.xlsx"
+#for this code to work make sure your header in the excel as follows:
+#financial year	  quarters	period
 
-        # Create the download directory if it doesn't exist
-if not os.path.exists(download_directory):
-    os.makedirs(download_directory)
-
-# Step 1: Load the Subsequent.xlsx file
-subsequent_excel_file_path = "C:/Excel/2Aand2B.xlsx"
 subsequent_workbook = openpyxl.load_workbook(subsequent_excel_file_path)
 subsequent_sheet = subsequent_workbook.active
 
-# Find the column indices for "financial year," "quarter," and "period"
 financial_year_column_index = 2
 quarters_column_index = 3
 period_column_index = 4
@@ -432,7 +422,6 @@ if (
 ):
     print("Columns 'financial year,' 'quarter,' and 'period' not found in the Subsequent.xlsx sheet.")
 else:
-    # Step 2: Iterate through all rows in the Subsequent.xlsx file
     for row in subsequent_sheet.iter_rows(min_row=2, values_only=True):
         financial_year = row[financial_year_column_index - 1]
         quarters_value = row[quarters_column_index - 1]
@@ -441,7 +430,6 @@ else:
         wait = WebDriverWait(driver, 15)
         wait.until(EC.invisibility_of_element_located((By.CLASS_NAME, "dimmer-holder")))
 
-        # Step 4: Select the financial year, quarter, and period
         financial_year_dropdown = driver.find_element(By.NAME, "fin")
         select = Select(financial_year_dropdown)
         select.select_by_visible_text(financial_year)
@@ -465,7 +453,6 @@ else:
 
         time.sleep(3)
 
-        # Step 5: Click on the Search button
         search_element = driver.find_element(By.CSS_SELECTOR, "button[class='btn btn-primary srchbtn']")
         driver.execute_script("arguments[0].click();", search_element)
         #search_element.click()
